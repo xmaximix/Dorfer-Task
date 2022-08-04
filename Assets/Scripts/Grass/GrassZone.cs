@@ -6,11 +6,20 @@ using TMPro;
 public class GrassZone : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI text;
-
-    [SerializeField] GrassBlock grassBlockPrefab;
+    
+    private GrassBlock grassBlockPrefab;
+    private int grassBlocksMax;
+    private int grassBlocksMin;
 
     [HideInInspector] public int currentGrassCount;
     [HideInInspector] public GrassSpawner grassSpawner;
+
+    private void Start()
+    {
+        grassBlockPrefab = grassSpawner.grassSpawnParameters.grassBlockPrefab;
+        grassBlocksMax = grassSpawner.grassSpawnParameters.grassBlocksMax;
+        grassBlocksMin = grassSpawner.grassSpawnParameters.grassBlocksMin;
+    }
 
     private IEnumerator WaitAndSpawnGrass(int seconds)
     {
@@ -25,7 +34,7 @@ public class GrassZone : MonoBehaviour
     public void OnAllGrassDestroyed()
     {
         StartCoroutine(WaitAndSpawnGrass(10));
-        SpawnGrassBlocks(Random.Range(4,8));
+        SpawnGrassBlocks(Random.Range(grassBlocksMin, grassBlocksMax));
     }
     
     private void SpawnGrassBlocks(int amount)

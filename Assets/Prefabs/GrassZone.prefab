@@ -49,7 +49,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 5586258018121557638}
-  grassBlockPrefab: {fileID: 5852961176625526600, guid: da526c6e9b06d3045ad1dffff2f552bd, type: 3}
   currentGrassCount: 0
   grassSpawner: {fileID: 0}
 --- !u!65 &4622393503932840789

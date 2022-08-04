@@ -5,9 +5,10 @@ using DG.Tweening;
 
 public class GrassSpawner : MonoBehaviour
 {
-    [SerializeField] Grass grassPrefab;
-    [SerializeField] int grassAmountMin;
-    [SerializeField] int grassAmountMax;
+    [SerializeField] public GrassSpawnParameters grassSpawnParameters;
+    private Grass grassPrefab;
+    private int grassAmountMin;
+    private int grassAmountMax;
     [SerializeField] GrassZone grassZone;
 
     private Vector3 spawnArea;
@@ -15,9 +16,17 @@ public class GrassSpawner : MonoBehaviour
     private List<Grass> spawnedGrass = new List<Grass>();
     private string sliceTag = "Sliceable";
 
-    private void Start()
+    private void Awake()
     {
         grassZone.grassSpawner = this;
+    }
+
+    private void Start()
+    {
+        grassPrefab = grassSpawnParameters.grassPrefab;
+        grassAmountMin = grassSpawnParameters.grassAmountMin;
+        grassAmountMax = grassSpawnParameters.grassAmountMax;
+
         var zoneCollider = grassZone.GetComponent<Collider>();
         spawnArea = zoneCollider.bounds.size * .8f;
         SpawnGrass();
